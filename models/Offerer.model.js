@@ -24,7 +24,6 @@ async function getOfferers(){
     let docs = []
     try{
         docs = await Offerer.find({})
-        console.log(docs)
     }catch (e) {
         console.log("error",e)
     }

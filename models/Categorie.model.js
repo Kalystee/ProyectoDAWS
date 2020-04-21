@@ -13,7 +13,6 @@ async function getCategories(){
     let docs = []
     try{
         docs = await Categorie.find({})
-        console.log(docs)
     }catch (e) {
         console.log("error",e)
     }

@@ -15,7 +15,6 @@ async function getZones(){
     let docs = []
     try{
         docs = await Zone.find({})
-        console.log(docs)
     }catch (e) {
         console.log("error",e)
     }

@@ -20,25 +20,4 @@ const userSchema = new Schema({
 
 const User = mongoose.model('User',userSchema);
 
-async function getUsers(){
-    let docs = []
-    try{
-        docs = await User.find({})
-        console.log(docs)
-    }catch (e) {
-        console.log("error",e)
-    }
-
-    return docs;
-}
-
-function createUser(user) {
-    let userMongo = User(user)
-    userMongo.save()
-        .then((resp) =>console.log(resp))
-        .catch((err) => console.log("Error : "+err))
-}
-
-User.getUsersAsync = getUsers;
-
 module.exports = User;

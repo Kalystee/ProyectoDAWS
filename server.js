@@ -19,11 +19,11 @@ connection.once("open",() => {
 
 const categorieRouter = require("./routes/categorie");
 const userRouter = require("./routes/user");
+const serviceRouter = require("./routes/service");
 
 app.use("/categories",categorieRouter);
 app.use("/users",userRouter);
-
-
+app.use("/services",serviceRouter);
 
 app.listen(port,() => {
     console.log(`Server is running on: http://127.0.0.1:${port}`);

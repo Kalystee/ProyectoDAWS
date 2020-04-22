@@ -20,8 +20,6 @@ router.route('/add').post((req,res) => {
         .catch(err => res.status(400).json({error:err}));
 });
 
-
-
 router.route('/:id').delete((req,res) => {
     Categorie.findByIdAndDelete(req.params.id)
         .then(categorie => res.json())

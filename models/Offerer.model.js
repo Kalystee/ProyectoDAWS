@@ -7,7 +7,7 @@ const oferrerSchema = new Schema({
     firsName:{type: String, required: true},
     lastName:{type: String, required: true},
     age:{type: Number, required: true},
-    sex:{type: String, required: true,maxLength: 1},
+    sex:{type: String, required: true,enum:["H","M"]},
     email:{type: String, required: true},
     cardNumber:{type: String, required: true},
     rfc:{type: String, required: true},

@@ -3,17 +3,15 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    username:{type: String, required: true, minlength: 3},
-    firsName:{type: String, required: true},
+    firstName:{type: String, required: true},
     lastName:{type: String, required: true},
     age:{type: Number, required: true},
-    sex:{type: String, required: true,maxLength: 1},
+    sex:{type: String, required: true,enum:["H","M"]},
     email:{type: String, required: true},
-    cardNumber:{type: String, required: true},
-    rfc:{type: String, required: true},
+    password:{type: String, required: true},
+    cardNumber:{type: String},
+    rfc:{type: String},
     address:{type: String, required: true},
-    postalCode:{type: Number, required: true},
-    city:{type: String, required: true},
 },{
     timestamps: true
 })

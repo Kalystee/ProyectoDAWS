@@ -71,23 +71,23 @@
     </section>
 		
 						      		
-										<form  id="contactForm" name="contactForm" class="contactForm">
+										<form  id="contactForm" name="contactForm" class="contactForm"  >
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
 														<label class="label" for="name">Usuario</label>
-														<input type="text" class="form-control" name="name" id="name" placeholder="Name" required>
+														<input type="text" class="form-control" name="name" id="emailLog" placeholder="Name" required>
 													</div>
 												</div>
 												<div class="col-md-6"> 
 													<div class="form-group">
 														<label class="label" for="email">Contraseña</label>
-														<input type="password" class="form-control" name="pw" id="pw" placeholder="password" required>
+														<input type="password" class="form-control" name="pw" id="pwLogin" placeholder="contrasenia" required>
 													</div>
 												
 												<div class="col-md-12">
 													<div class="form-group">
-														<input type="submit" value="Accesar" class="btn btn-primary">
+														<input type="submit"  value="Accesar" class="btn btn-primary">
 														<div class="submitting"></div>
 													</div>
 												</div>
@@ -106,13 +106,13 @@
 		            <h2 class="mb-0" style="color:white; font-size: 24px;">¿Aún no eres miembro? Regristrate </h2>
 		          </div>
 		          <div class="col-md-6 d-flex align-items-center">
-		            <form action="#" class="subscribe-form">
+		            <form action="#" class="subscribe-form" >
 		              <div class="form-group d-flex">
 						<button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal">
 							Regristo
 						  </button>
 					
-						  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
 							<div class="modal-dialog" role="document">
 							  <div class="modal-content">
 								<div class="modal-header">
@@ -121,46 +121,41 @@
 									<span aria-hidden="true">&times;</span>
 								  </button>
 								</div>
-								<div class="modal-body">
-									<form>
+								<div class="modal-body" name="registro" onchange="cambioReg()">
+									<form id="registro" >
 										<div class="form-row">
 										  <div class="form-group col-md-6">
-											<label for="inputEmail4">Email</label>
-											<input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+											<label for="inputEmail4">Correo</label>
+											<input type="email" class="form-control" id="emailR" placeholder="Email" required>
+										  </div>
+										  <div class="form-group col-md-12">
+											<label for="inputEmail4">Nombre</label>
+											<input type="text" class="form-control" id="Nombre" placeholder="Nombre COmpleto" required>
 										  </div>
 										  <div class="form-group col-md-6">
-											<label for="inputPassword4">Password</label>
-											<input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+											<label for="inputPassword4">Contrasena</label>
+											<input type="password" class="form-control" id="passwordR" placeholder="Password" required>
 										  </div>
 										</div>
 										<div class="form-group">
-										  <label for="inputAddress">Address</label>
-										  <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+										  <label for="inputAddress">direccion</label>
+										  <input type="text" class="form-control" id="Address" placeholder="1234 Main St" required>
 										</div>
-										<div class="form-group">
-										  <label for="inputAddress2">Address 2</label>
-										  <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-										</div>
+										
 										<div class="form-row">
 										  <div class="form-group col-md-6">
-											<label for="inputCity">City</label>
-											<input type="text" class="form-control" id="inputCity">
+											<label for="inputCity">ciudad</label>
+											<input type="text" class="form-control" id="ciudad" required>
 										  </div>
-										  <div class="form-group col-md-4">
-											<label for="inputState">State</label>
-											<select id="inputState" class="form-control">
-											  <option selected>Choose...</option>
-											  <option>...</option>
-											</select>
-										  </div>
+										  
 										  <div class="form-group col-md-2">
 											<label for="inputZip">Zip</label>
-											<input type="text" class="form-control" id="inputZip">
+											<input type="text" class="form-control" id="cp">
 										  </div>
 										</div>
 										<div class="form-group">
 										  <div class="form-check">
-											<input class="form-check-input" type="checkbox" id="gridCheck">
+											<input class="form-check-input" type="checkbox" id="UserTipo2">
 											<label class="form-check-label" for="gridCheck">
 											  registrame como prestador de servicios
 											</label>
@@ -170,7 +165,7 @@
 								</div>
 								<div class="modal-footer">
 								  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-								  <button type="button" class="btn btn-primary">Enviar</button>
+								  <button type="button" id="bntSubR" class="btn btn-primary" onclick="signin()">Enviar</button>
 								</div>
 							  </div>
 							</div>
@@ -276,7 +271,7 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
-  <script src="js/contact.js"></script>
+  <script src="js/authentication.js"></script>
   
   
     

@@ -20,19 +20,6 @@ router.route('/:id').delete((req,res) => {
         .catch(err => res.status(400).json({error:err}));
 })
 
-router.route('/add').post(async (req,res) => {
-    let user = await User.findOne({email:req.body.email})
-    if(user){
-        res.json({error:"Email already use"})
-    }
-    let hashedPassword = bcrypt.hashSync(req.body.password,8);
-    let newUser = new User(req.body);
-    newUser.password = hashedPassword;
-    newUser.save()
-        .then(() => res.json(newUser))
-        .catch((err) => console.log(err))
-
-})
 router.route('/update/:id').post((req,res) => {
     User.findById(req.params.id)
         .then(user => {

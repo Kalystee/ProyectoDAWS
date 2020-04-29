@@ -20,7 +20,9 @@ connection.once("open",() => {
 const categorieRouter = require("./routes/categorie");
 const userRouter = require("./routes/user");
 const serviceRouter = require("./routes/service");
+const authentificationRouter = require("./routes/authentification");
 
+app.use(authentificationRouter);
 app.use("/categories",categorieRouter);
 app.use("/users",userRouter);
 app.use("/services",serviceRouter);

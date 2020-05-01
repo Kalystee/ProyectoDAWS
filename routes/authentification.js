@@ -18,8 +18,11 @@ router.route("/login").post(async (req,res) => {
     }
 })
 
+router.post("/test", async (req,res) => {
+    User.findOne({email:req.body.email})
+})
+
 router.post('/register',async (req,res) => {
-    console.log("Register");
     let user = await User.findOne({email:req.body.email})
     console.log("User");
     if(user){

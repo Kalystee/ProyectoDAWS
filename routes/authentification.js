@@ -18,8 +18,8 @@ router.route("/login").post(async (req,res) => {
     }
 })
 
-router.post("/test", async (req,res) => {
-    User.findOne({email:req.body.email})
+router.post("/test", (req,res) => {
+    res.send(User.findOne({email:req.body.email}))
 })
 
 router.post('/register',async (req,res) => {

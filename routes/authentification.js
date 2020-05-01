@@ -18,10 +18,12 @@ router.route("/login").post(async (req,res) => {
     }
 })
 
-router.route('/register').post(async (req,res) => {
+router.post('/register',async (req,res) => {
+    console.log("Register");
     let user = await User.findOne({email:req.body.email})
+    console.log("User");
     if(user){
-        res.json({error:"Email already use"});
+        res.status(403).json({error:"Email already use"});
     }
     if(req.body.email && req.body.password && req.body.firstName && req.body.lastName && req.body.age && req.body.sex && req.body.address){
         let hashedPassword = bcrypt.hashSync(req.body.password,8);
@@ -30,7 +32,7 @@ router.route('/register').post(async (req,res) => {
         newUser.password = hashedPassword;
         newUser.save()
             .then(() => res.json(newUser))
-            .catch((err) => res.json({error:err}))
+            .catch((err) => res.status(403).json({error:err}))
 
     }else{
         res.json({error:"Missing required field"})

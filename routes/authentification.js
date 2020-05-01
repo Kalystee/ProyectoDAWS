@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const User = require("../models/User.model")
+const User = require("../models/User.model");
+
 
 router.route("/login").post(async (req,res) => {
     let user = await User.findOne({email:req.body.email})
@@ -9,10 +10,9 @@ router.route("/login").post(async (req,res) => {
         res.status(403).json({error:"Wrong password or email"})
     }
 
-    let correspond = bcrypt.compareSync(req.body.password, user.password);
-    if(correspond){
-        //Make a token to this user
-        res.json(user)
+    if(bcrypt.compareSync(req.body.password, user.password)){
+        let token = jwt.sign({email:user.email},"secret",{expiresIn: "2 days"})
+        res.json({token})
     }else{
         res.status(403).json({error:"Wrong password or email"})
     }

@@ -7,29 +7,15 @@ const User = require("../models/User.model");
 router.route("/login").post(async (req,res) => {
     let user = await User.findOne({email:req.body.email})
     if(!user){
-        res.json({error:"Wrong password or email"})
+        res.status(403).json({error:"Wrong password or email"})
     }
 
     if(bcrypt.compareSync(req.body.password, user.password)){
         let token = jwt.sign({email:user.email},"secret",{expiresIn: "2 days"})
         res.json({token})
     }else{
-        res.json({error:"Wrong password or email"})
+        res.status(403).json({error:"Wrong password or email"})
     }
-})
-
-router.post("/test", (req,res) => {
-    User.findOne({email:req.body.email}).exec(function (err, docs) {
-        if(err){
-            console.log("Error : "+err)
-            res.send(err)
-        }else{
-            console.log("Success")
-            console.log(docs);
-            res.send(docs)
-        }
-    });
-
 })
 
 router.post('/register',async (req,res) => {
@@ -48,7 +34,7 @@ router.post('/register',async (req,res) => {
             .catch((err) => res.status(403).json({error:err}))
 
     }else{
-        res.json({error:"Missing required field"})
+        res.status(403).json({error:"Missing required field"})
     }
 })
 

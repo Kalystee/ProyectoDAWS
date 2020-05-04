@@ -19,7 +19,17 @@ router.route("/login").post(async (req,res) => {
 })
 
 router.post("/test", (req,res) => {
-    res.send(User.findOne({email:req.body.email}))
+    User.findOne({email:req.body.email}).exec(function (err, docs) {
+        if(err){
+            console.log("Error : "+err)
+            res.send(err)
+        }else{
+            console.log("Success")
+            console.log(docs);
+            res.send(docs)
+        }
+    });
+
 })
 
 router.post('/register',async (req,res) => {

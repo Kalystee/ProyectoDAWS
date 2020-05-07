@@ -22,9 +22,10 @@ router.post('/register',async (req,res) => {
     let user = await User.findOne({email:req.body.email})
     console.log("Register");
     if(user){
-        res.status(403).json({error:"Email already use"});
+        res.status(403).json({error:"Email already used"});
     }
-    if(req.body.email && req.body.password && req.body.name && req.body.tipo && req.body.postalCode && req.body.city && req.body.address){
+    console.log(req.body)
+    if(req.body.email && req.body.password && req.body.name && req.body.tipo !== undefined && req.body.postalCode && req.body.city && req.body.address){
         let hashedPassword = bcrypt.hashSync(req.body.password,8);
 
         let newUser = new User(req.body);

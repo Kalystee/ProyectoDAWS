@@ -1,11 +1,11 @@
 const router = require('express').Router()
 let Service = require("../models/Service.model")
 
-router.route("/").get((req,res) => {
-    Service.find()
+router.route("/all").get((req,res) => {
+     Service.find()
         .then(services => res.json(services))
         .catch(err => res.status(400).json({error:err}));
-});
+})
 
 router.route('/:id').get((req,res) => {
     Service.findById(req.params.id)

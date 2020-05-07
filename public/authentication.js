@@ -1,12 +1,10 @@
 // index y validacion de usuarios
 "use strict"
 
-localStorage.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA3NTcxIiwiaWF0IjoxNTczNDkzNTMyfQ.MdlxEKYd4CRHHx7NR13-EQVIVJgO29fnKlpsM0Wr9dc"
+window.localStorage = {token:""}
 
 //Cambios en el formulario de Login
-let login = document.getElementById("contactForm");
-login.addEventListener('submit', logMe)
-//Registro inicial 
+//Registro inicial
 let register = document.getElementsByName("registro");
 //register.addEventListener('change', cambioReg );
 
@@ -23,7 +21,12 @@ btnSubR.setAttribute('disabled','');
 let camposval = document.querySelectorAll(".modal  input:valid");
 camposval.forEach(obj => {obj.style = "border-color: none"});
 
-
+async function makeHTTPRequest(endpoint,method,headers,body) {
+    return await fetch(/*"https://proyecto-dasw.herokuapp.com"*/"http://127.0.0.1:5000"+endpoint,{method:method,body:body,headers:headers})
+        .then(response => {
+            return response.json()
+        })
+}
 
 
 
@@ -47,56 +50,44 @@ function cambioReg(event) {
         
         
      } else {
-        btnSubR.setAttribute('disabled',''); 
-
-        
+        btnSubR.setAttribute('disabled','');
      }
-       
-    
-       
-
-   
 }
 
-function signin (event) {
-    console.log('se envio esto');
-    
-
-    let GenerarHeader = {
-        'x-auth': localStorage.token,
+async function signin (event) {
+    let registerHeaders = {
         'Content-Type': 'application/json'
     };
 
     let user = {
-        nombre: document.getElementById('Nombre').value,
-        correo: document.getElementById('emailR').value,
-        direccion: document.getElementById('Address').value,
-        ciudad: document.getElementById('ciudad').value,
-        codigoPostal: document.getElementById('cp').value,
+        name: document.getElementById('Nombre').value,
+        email: document.getElementById('emailR').value,
+        address: document.getElementById('Address').value,
+        city: document.getElementById('ciudad').value,
+        postalCode: document.getElementById('cp').value,
         password: document.getElementById('passwordR').value, 
-        tipo: document.getElementById('UserTipo2').value
+        tipo: document.getElementById('UserTipo2').checked ? 1 : 0
     }
-    console.log(user);
-
-    makeHTTPRequest('/api/login', 'POST', registerHeaders, user/*, cbOk, cbErr*/);
-
+    let result = await makeHTTPRequest('/register', 'POST', registerHeaders,JSON.stringify(user));
+    console.log(result)
 }
 
 
 //Funciones del login
 
-function logMe () {
-    event.preventDefault() 
+async function logMe () {
+    event.preventDefault();
     let registerHeaders = {
-        'x-auth': localStorage.token,
         'Content-Type': 'application/json'
     };
     let user = {
-        correo: document.getElementById('emailLog').value,
+        email: document.getElementById('emailLog').value,
         password: document.getElementById('pwLogin').value
     }
 
-    window.open("./services.html");
-    makeHTTPRequest('/api/login', 'POST', registerHeaders, user/*, cbOk, cbErr*/);
-
+    let result = await makeHTTPRequest('/login', 'POST', registerHeaders, JSON.stringify(user));
+    window.localStorage.setItem("token",result.token);
+    if(result.token){
+        window.location = "services.html";
+    }
 }

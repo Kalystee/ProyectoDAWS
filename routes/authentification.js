@@ -3,15 +3,17 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const User = require("../models/User.model");
 
-
 router.route("/login").post(async (req,res) => {
+    console.log(req.body);
     let user = await User.findOne({email:req.body.email})
     if(!user){
         res.status(403).json({error:"Wrong password or email"})
     }
 
     if(bcrypt.compareSync(req.body.password, user.password)){
-        let token = jwt.sign({email:user.email},"secret",{expiresIn: "2 days"})
+
+        let token = jwt.sign({email:user.email},"secret",{expiresIn: "2h"})
+        res.cookie("token",token);
         res.json({token})
     }else{
         res.status(403).json({error:"Wrong password or email"})
@@ -19,6 +21,7 @@ router.route("/login").post(async (req,res) => {
 })
 
 router.post('/register',async (req,res) => {
+    console.log(req);
     let user = await User.findOne({email:req.body.email})
     console.log("Register");
     if(user){

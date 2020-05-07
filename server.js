@@ -1,6 +1,7 @@
-const express = require("express")
-const mongoose = require("mongoose")
+const express = require("express");
+const mongoose = require("mongoose");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
 require("dotenv").config()
 
@@ -9,11 +10,11 @@ const port = process.env.PORT || 5000;
 
 app.use(cors())
 app.use(express.json())
+app.use(cookieParser())
 
 const uri = process.env.ATLAS_URI
 mongoose.connect(uri, { useNewUrlParser:true, useCreateIndex:true,useUnifiedTopology: true });
 const connection = mongoose.connection
-console.log(uri)
 connection.once("open",() => {
     console.log("MongoDB database connection established successfully")
 })

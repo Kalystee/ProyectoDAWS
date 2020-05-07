@@ -22,7 +22,7 @@ let camposval = document.querySelectorAll(".modal  input:valid");
 camposval.forEach(obj => {obj.style = "border-color: none"});
 
 async function makeHTTPRequest(endpoint,method,headers,body) {
-    return await fetch(/*"https://proyecto-dasw.herokuapp.com"*/"http://127.0.0.1:5000"+endpoint,{method:method,body:body,headers:headers})
+    return await fetch("https://proyecto-dasw.herokuapp.com"/*"http://127.0.0.1:5000"*/+endpoint,{method:method,body:body,headers:headers})
         .then(response => {
             return response.json()
         })

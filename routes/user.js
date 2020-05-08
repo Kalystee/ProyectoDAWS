@@ -1,3 +1,5 @@
+//Guillaume THIBAULT
+
 const router = require('express').Router()
 let User = require("../models/User.model")
 const auth = require("./middleware/auth")

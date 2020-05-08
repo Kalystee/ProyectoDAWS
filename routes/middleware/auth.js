@@ -1,3 +1,5 @@
+//Guillaume THIBAULT
+
 const jwt = require("jsonwebtoken");
 
 function checkToken(req,res,next){

@@ -1,3 +1,5 @@
+//Guillaume THIBAULT
+
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;

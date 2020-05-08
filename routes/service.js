@@ -1,10 +1,25 @@
+//Guillaume THIBAULT
+
 const router = require('express').Router()
 let Service = require("../models/Service.model")
 
-router.route("/all").get((req,res) => {
-     Service.find()
-        .then(services => res.json(services))
+router.route("/").get(async (req,res) => {
+    let name = req.query.name|null;
+
+     let services = awaitService.find()
+        .then(services => {
+            return services;
+        })
         .catch(err => res.status(400).json({error:err}));
+
+     if(req.query.categorie){
+         services = services.filter(s => s.categorie === req.query.categorie)
+     }
+     if(req.query.name){
+         services = services.filter(s => s.name.toUpperCase().includes(req.query.name.toUpperCase()))
+     }
+
+     res.json(services)
 })
 
 router.route('/:id').get((req,res) => {

@@ -13,14 +13,4 @@ const zoneSchema = new Schema({
 
 const Zone = mongoose.model("Zone",zoneSchema);
 
-async function getZones(){
-    let docs = []
-    try{
-        docs = await Zone.find({})
-    }catch (e) {
-        console.log("error",e)
-    }
-    return docs;
-}
-
 module.exports = Zone

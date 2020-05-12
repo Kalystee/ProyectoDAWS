@@ -35,7 +35,7 @@ router.route('/by-categories/:categoryId').get((req,res) => {
 
 router.route('/add').post((req,res) => {
     const newService = new Service(req.body);
-    if(req.body.name && req.body.offererId && req.body.categoryId && req.body.description && req.body.data && req.body.time && req.body.price){
+    if(req.body.name && req.body.offererId && req.body.categoryId && req.body.description && req.body.date && req.body.time && req.body.price){
         newService.save()
             .then(() => res.json(newService))
             .catch(err => res.status(400).json({error:err}));

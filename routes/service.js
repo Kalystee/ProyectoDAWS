@@ -4,9 +4,8 @@ const router = require('express').Router()
 let Service = require("../models/Service.model")
 
 router.route("/").get(async (req,res) => {
-    let name = req.query.name|null;
 
-     let services = awaitService.find()
+     let services = await Service.find()
         .then(services => {
             return services;
         })
@@ -22,18 +21,29 @@ router.route("/").get(async (req,res) => {
      res.json(services)
 })
 
-router.route('/:id').get((req,res) => {
-    Service.findById(req.params.id)
+router.route('/by-offerer/:offererId').get((req,res) => {
+    Service.findBy({offererId:req.params.offererId})
+        .then(service => res.json(service))
+        .catch(err => res.status(400).json({error:err}));
+})
+
+router.route('/by-categories/:categoryId').get((req,res) => {
+    Service.findBy({categoryId:req.params.categoryId})
         .then(service => res.json(service))
         .catch(err => res.status(400).json({error:err}));
 })
 
 router.route('/add').post((req,res) => {
     const newService = new Service(req.body);
-    newService.save()
-        .then(() => res.json(newService))
-        .catch(err => res.status(400).json({error:err}));
-});
+    if(req.body.name && req.body.offererId && req.body.categoryId && req.body.description && req.body.data && req.body.time && req.body.price){
+        newService.save()
+            .then(() => res.json(newService))
+            .catch(err => res.status(400).json({error:err}));
+    }else{
+        req.status(403).json({error:"Missing parameters"})
+    }
+})
+
 
 router.route('/:id').delete((req,res) => {
     Service.findByIdAndDelete(req.params.id)

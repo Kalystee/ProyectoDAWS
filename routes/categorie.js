@@ -17,6 +17,7 @@ router.route('/:id').get((req,res) => {
 
 router.route('/add').post((req,res) => {
     const newCategorie = new Categorie(req.body);
+    console.log(req.body)
     newCategorie.save()
         .then(() => res.json(categorie))
         .catch(err => res.status(400).json({error:err}));

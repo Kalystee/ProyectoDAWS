@@ -1,24 +1,26 @@
 //Guillaume THIBAULT
 
 const router = require('express').Router()
-let Service = require("../models/Service.model")
+let Service = require("../models/Service.model");
+let Categorie =require("../models/Categorie.model");
+let User = require("../models/User.model");
 
 router.route("/").get(async (req,res) => {
 
-     let services = await Service.find()
+    let services = await Service.find()
         .then(services => {
             return services;
         })
         .catch(err => res.status(400).json({error:err}));
 
-     if(req.query.categorie){
-         services = services.filter(s => s.categorie === req.query.categorie)
-     }
-     if(req.query.name){
-         services = services.filter(s => s.name.toUpperCase().includes(req.query.name.toUpperCase()))
-     }
+    if(req.query.categorie){
+        services = services.filter(s => s.categorie === req.query.categorie)
+    }
+    if(req.query.name){
+        services = services.filter(s => s.name.toUpperCase().includes(req.query.name.toUpperCase()))
+    }
 
-     res.json(services)
+    res.json(services)
 })
 
 router.route('/by-offerer/:offererId').get((req,res) => {
@@ -33,12 +35,18 @@ router.route('/by-categories/:categoryId').get((req,res) => {
         .catch(err => res.status(400).json({error:err}));
 })
 
-router.route('/add').post((req,res) => {
+router.route('/add').post( async (req,res) => {
     const newService = new Service(req.body);
     if(req.body.name && req.body.offererId && req.body.categoryId && req.body.description && req.body.date && req.body.time && req.body.price){
-        newService.save()
-            .then(() => res.json(newService))
-            .catch(err => res.status(400).json({error:err}));
+        let category = await Categorie.findOne({id:req.body.categoryId});
+        let user = await User.findOne({email:req.body.offererId});
+        if(user.tipo === 1 && category){
+            newService.save()
+                .then(() => res.json(newService))
+                .catch(err => res.status(400).json({error:err}));
+        }else{
+            res.status(403).json({error:"User is not an offerer or invalid categoryId"})
+        }
     }else{
         res.status(403).json({error:"Missing parameters"})
     }

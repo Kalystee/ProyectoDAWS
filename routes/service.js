@@ -40,7 +40,7 @@ router.route('/add').post((req,res) => {
             .then(() => res.json(newService))
             .catch(err => res.status(400).json({error:err}));
     }else{
-        req.status(403).json({error:"Missing parameters"})
+        res.status(403).json({error:"Missing parameters"})
     }
 })
 

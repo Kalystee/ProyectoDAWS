@@ -11,14 +11,4 @@ const categorieSchema = new Schema({
 
 const Categorie = mongoose.model("Categorie",categorieSchema);
 
-async function getCategories(){
-    let docs = []
-    try{
-        docs = await Categorie.find({})
-    }catch (e) {
-        console.log("error",e)
-    }
-    return docs;
-}
-
 module.exports = Categorie

@@ -9,20 +9,20 @@ router.get("/",auth.checkToken,async (req,res) => {
         .catch(err => res.status(400).json({error:err}));
 });
 
-router.route('/:id').get((req,res) => {
-    User.findById(req.params.id)
+router.route('/:email').get((req,res) => {
+    User.findOne({email:req.params.email})
         .then(user => res.json(user))
         .catch(err => res.status(400).json({error:err}));
 })
 
-router.route('/:id').delete((req,res) => {
-    User.findByIdAndDelete(req.params.id)
+router.route('/:email').delete((req,res) => {
+    User.findOneAndDelete({email:req.params.email})
         .then(user => res.json())
         .catch(err => res.status(400).json({error:err}));
 })
 
-router.route('/update/:id').post((req,res) => {
-    User.findById(req.params.id)
+router.route('/update/:email').post((req,res) => {
+    User.findOne({email:req.params.email})
         .then(user => {
             user.username = req.body.username;
             user.firstName = req.body.firstName;

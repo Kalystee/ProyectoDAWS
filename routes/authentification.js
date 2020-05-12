@@ -4,6 +4,7 @@ const router = require('express').Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const User = require("../models/User.model");
+const Offerer = require("../models/Offerer.model");
 
 router.route("/login").post(async (req,res) => {
     console.log(req.body);
@@ -36,12 +37,24 @@ router.post('/register',async (req,res) => {
         let newUser = new User(req.body);
         newUser.password = hashedPassword;
         newUser.save()
-            .then(() => res.json(newUser))
+            .then(() => {
+                if(newUser.tipo === 1){
+                    let offererData = {
+                        userId:newUser.id,
+                    }
+                    let newOfferer = new Oferrer(offererData);
+                    newOfferer.save().then(() => {
+                        console.log("Offerer Registered")
+                    })
+                }
+                res.json(newUser)
+            })
             .catch((err) => res.status(403).json({error:err}))
 
     }else{
         res.status(403).json({error:"Missing required field"})
     }
 })
+
 
 module.exports = router;

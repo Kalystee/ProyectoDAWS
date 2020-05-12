@@ -80,13 +80,15 @@ async function logMe () {
     let registerHeaders = {
         'Content-Type': 'application/json'
     };
+    let userEmail = document.getElementById('emailLog').value;
     let user = {
-        email: document.getElementById('emailLog').value,
+        email: userEmail,
         password: document.getElementById('pwLogin').value
     }
 
     let result = await makeHTTPRequest('/login', 'POST', registerHeaders, JSON.stringify(user));
     window.localStorage.setItem("token",result.token);
+    window.localStorage.setItem("userEmail",userEmail);
     if(result.token){
         window.location = "services.html";
     }

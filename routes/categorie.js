@@ -42,4 +42,12 @@ router.route('/update/:id').post((req,res) => {
         .catch(err => res.status(400).json({error:err}));
 })
 
+router.route('/delete/:id').post((req,res) => {
+    Categorie.deleteOne({_id:req.body.id}, function(err, obj) {
+        if (err) throw err;
+        console.log("1 document deleted");
+        res.json("Done")
+    })
+})
+
 module.exports = router;

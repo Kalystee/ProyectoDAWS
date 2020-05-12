@@ -19,6 +19,15 @@ function fetchServices(){
     //pedir variable
 }
 
+function showDetail(idService, idCategory){
+
+  /*Si idCategory = {idBaile, idComida, idPerros, ... idX}
+                Si idService == a N 
+                    llamar imprimir idService N dentro del Modal
+  }*/
+  console.log("ShowDetail activated")
+}
+
 function innerHTML(val){
     var valor = loadPage('value')
     switch (valor) {
@@ -34,7 +43,7 @@ function innerHTML(val){
                 <p>&map; Patricio Rum</p>
                 <p>San Jacinto #23 3399887766</p>
                 <!--<button class="btn btn-default" onclick="showDetail" id="idButton1">Me interesa</button>-->
-                <a href="#modal01" rel="modal:open" class="btn btn-default">Me interesa</a>
+                <a href="#modal01" rel="modal:open" onclick="showDetail()" class="btn btn-default"  >Me interesa</a>
                 <ul class="follow-us clearfix">
                   <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                   <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -48,8 +57,8 @@ function innerHTML(val){
                 <h3><a id="show-modal-Baile" href="#">Pozolatzo & más</a></h3>
                 <p>&map; Jacob Lals</p>
                 <p>Avenida 33 3344556677</p>
-                <!--<button class="btn btn-default" onclick="showDetail" id="idButton2">Me interesa</button>-->
-                <a href="#modal01" rel="modal:open" class="btn btn-default">Me interesa</a>
+                <!--<button class="btn btn-default" onclick="showDetail()" id="idButton2">Me interesa</button>-->
+                <a href="#modal01" rel="modal:open" onclick="showDetail()" class="btn btn-default">Me interesa</a>
                 <ul class="follow-us clearfix">
                   <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                   <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -64,8 +73,8 @@ function innerHTML(val){
                 <h3><a id="show-modal-Manish" href="#">Flautas </a></h3>
                 <p> &map; Samantha Hart</p>
                 <p>Circunvalación #79 1232145676</p>
-                <!--<button class="btn btn-default" onclick="showDetail" id="idButton3">Me interesa</button>-->
-                <a href="#modal01" rel="modal:open" class="btn btn-default">Me interesa</a>
+                <!--<button class="btn btn-default" OnClick="showDetail" id="idButton3">Me interesa</button>-->
+                <a href="#modal01" rel="modal:open" onclick="showDetail()" class="btn btn-default">Me interesa</a>
                 <ul class="follow-us clearfix">
                   <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                   <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -91,7 +100,7 @@ function innerHTML(val){
                 <p>&map; Patricio Rum</p>
                 <p>San Jacinto #23 3399887766</p>
                 <!--<button class="btn btn-default" onclick="showDetail" id="idButton1">Me interesa</button>-->
-                <a href="#modal01" rel="modal:open" class="btn btn-default">Me interesa</a>
+                <a href="#modal01" rel="modal:open" onclick="showDetail()" class="btn btn-default">Me interesa</a>
                 <ul class="follow-us clearfix">
                   <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                   <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -106,7 +115,7 @@ function innerHTML(val){
                 <p>&map; Jacob Lals</p>
                 <p>Avenida 33 3344556677</p>
                 <!--<button class="btn btn-default" onclick="showDetail" id="idButton2">Me interesa</button>-->
-                <a href="#modal01" rel="modal:open" class="btn btn-default">Me interesa</a>
+                <a href="#modal01" rel="modal:open" onclick="showDetail()" class="btn btn-default">Me interesa</a>
                 <ul class="follow-us clearfix">
                   <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                   <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -122,7 +131,7 @@ function innerHTML(val){
                 <p> &map; Samantha Hart</p>
                 <p>Circunvalación #79 1232145676</p>
                 <!--<button class="btn btn-default" onclick="showDetail" id="idButton3">Me interesa</button>-->
-                <a href="#modal01" rel="modal:open" class="btn btn-default">Me interesa</a>
+                <a href="#modal01" rel="modal:open" onclick="showDetail()" class="btn btn-default">Me interesa</a>
                 <ul class="follow-us clearfix">
                   <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                   <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -148,7 +157,7 @@ function innerHTML(val){
                 <p>&map; Patricio Rum</p>
                 <p>San Jacinto #23 3399887766</p>
                 <!--<button class="btn btn-default" onclick="showDetail" id="idButton1">Me interesa</button>-->
-                <a href="#modal01" rel="modal:open" class="btn btn-default">Me interesa</a>
+                <a href="#modal01" rel="modal:open" onclick="showDetail()" class="btn btn-default">Me interesa</a>
                 <ul class="follow-us clearfix">
                   <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                   <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -163,7 +172,7 @@ function innerHTML(val){
                 <p>&map; Jacob Lals</p>
                 <p>Avenida 33 3344556677</p>
                 <!--<button class="btn btn-default" onclick="showDetail" id="idButton2">Me interesa</button>-->
-                <a href="#modal01" rel="modal:open" class="btn btn-default">Me interesa</a>
+                <a href="#modal01" rel="modal:open" onclick="showDetail()" class="btn btn-default">Me interesa</a>
                 <ul class="follow-us clearfix">
                   <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                   <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -179,7 +188,7 @@ function innerHTML(val){
                 <p> &map; Samantha Hart</p>
                 <p>Circunvalación #79 1232145676</p>
                 <!--<button class="btn btn-default" onclick="showDetail" id="idButton3">Me interesa</button>-->
-                <a href="#modal01" rel="modal:open" class="btn btn-default">Me interesa</a>
+                <a href="#modal01" rel="modal:open" onclick="showDetail()" class="btn btn-default">Me interesa</a>
                 <ul class="follow-us clearfix">
                   <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                   <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -205,7 +214,7 @@ function innerHTML(val){
                 <p>&map; Patricio Rum</p>
                 <p>San Jacinto #23 3399887766</p>
                 <!--<button class="btn btn-default" onclick="showDetail" id="idButton1">Me interesa</button>-->
-                <a href="#modal01" rel="modal:open" class="btn btn-default">Me interesa</a>
+                <a href="#modal01" rel="modal:open" onclick="showDetail()" class="btn btn-default">Me interesa</a>
                 <ul class="follow-us clearfix">
                   <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                   <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -220,7 +229,7 @@ function innerHTML(val){
                 <p>&map; Jacob Lals</p>
                 <p>Avenida 33 3344556677</p>
                 <!--<button class="btn btn-default" onclick="showDetail" id="idButton2">Me interesa</button>-->
-                <a href="#modal01" rel="modal:open" class="btn btn-default">Me interesa</a>
+                <a href="#modal01" rel="modal:open" onclick="showDetail()" class="btn btn-default">Me interesa</a>
                 <ul class="follow-us clearfix">
                   <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                   <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -236,7 +245,7 @@ function innerHTML(val){
                 <p> &map; Samantha Hart</p>
                 <p>Circunvalación #79 1232145676</p>
                 <!--<button class="btn btn-default" onclick="showDetail" id="idButton3">Me interesa</button>-->
-                <a href="#modal01" rel="modal:open" class="btn btn-default">Me interesa</a>
+                <a href="#modal01" rel="modal:open" onclick="showDetail()" class="btn btn-default">Me interesa</a>
                 <ul class="follow-us clearfix">
                   <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                   <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -261,7 +270,7 @@ function innerHTML(val){
                 <p>&map; Patricio Rum</p>
                 <p>San Jacinto #23 3399887766</p>
                 <!--<button class="btn btn-default" onclick="showDetail" id="idButton1">Me interesa</button>-->
-                <a href="#modal01" rel="modal:open" class="btn btn-default">Me interesa</a>
+                <a href="#modal01" rel="modal:open" onclick="showDetail()" class="btn btn-default">Me interesa</a>
                 <ul class="follow-us clearfix">
                   <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                   <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -276,7 +285,7 @@ function innerHTML(val){
                 <p>&map; Jacob Lals</p>
                 <p>Avenida 33 3344556677</p>
                 <!--<button class="btn btn-default" onclick="showDetail" id="idButton2">Me interesa</button>-->
-                <a href="#modal01" rel="modal:open" class="btn btn-default">Me interesa</a>
+                <a href="#modal01" rel="modal:open" onclick="showDetail()" class="btn btn-default">Me interesa</a>
                 <ul class="follow-us clearfix">
                   <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                   <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -292,7 +301,7 @@ function innerHTML(val){
                 <p> &map; Samantha Hart</p>
                 <p>Circunvalación #79 1232145676</p>
                 <!--<button class="btn btn-default" onclick="showDetail" id="idButton3">Me interesa</button>-->
-                <a href="#modal01" rel="modal:open" class="btn btn-default">Me interesa</a>
+                <a href="#modal01" rel="modal:open" onclick="showDetail()" class="btn btn-default">Me interesa</a>
                 <ul class="follow-us clearfix">
                   <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                   <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -317,7 +326,7 @@ function innerHTML(val){
                 <p>&map; Patricio Rum</p>
                 <p>San Jacinto #23 3399887766</p>
                 <!--<button class="btn btn-default" onclick="showDetail" id="idButton1">Me interesa</button>-->
-                <a href="#modal01" rel="modal:open" class="btn btn-default">Me interesa</a>
+                <a href="#modal01" rel="modal:open" onclick="showDetail()" class="btn btn-default">Me interesa</a>
                 <ul class="follow-us clearfix">
                   <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                   <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -332,7 +341,7 @@ function innerHTML(val){
                 <p>&map; Jacob Lals</p>
                 <p>Avenida 33 3344556677</p>
                 <!--<button class="btn btn-default" onclick="showDetail" id="idButton2">Me interesa</button>-->
-                <a href="#modal01" rel="modal:open" class="btn btn-default">Me interesa</a>
+                <a href="#modal01" rel="modal:open" onclick="showDetail()" class="btn btn-default">Me interesa</a>
                 <ul class="follow-us clearfix">
                   <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                   <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -348,7 +357,7 @@ function innerHTML(val){
                 <p> &map; Samantha Hart</p>
                 <p>Circunvalación #79 1232145676</p>
                 <!--<button class="btn btn-default" onclick="showDetail" id="idButton3">Me interesa</button>-->
-                <a href="#modal01" rel="modal:open" class="btn btn-default">Me interesa</a>
+                <a href="#modal01" rel="modal:open" onclick="showDetail()" class="btn btn-default">Me interesa</a>
                 <ul class="follow-us clearfix">
                   <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                   <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -373,7 +382,7 @@ function innerHTML(val){
                 <p>&map; Patricio Rum</p>
                 <p>San Jacinto #23 3399887766</p>
                 <!--<button class="btn btn-default" onclick="showDetail" id="idButton1">Me interesa</button>-->
-                <a href="#modal01" rel="modal:open" class="btn btn-default">Me interesa</a>
+                <a href="#modal01" rel="modal:open"  onclick="showDetail()"class="btn btn-default">Me interesa</a>
                 <ul class="follow-us clearfix">
                   <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                   <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -388,7 +397,7 @@ function innerHTML(val){
                 <p>&map; Jacob Lals</p>
                 <p>Avenida 33 3344556677</p>
                 <!--<button class="btn btn-default" onclick="showDetail" id="idButton2">Me interesa</button>-->
-                <a href="#modal01" rel="modal:open" class="btn btn-default">Me interesa</a>
+                <a href="#modal01" rel="modal:open" onclick="showDetail()" class="btn btn-default">Me interesa</a>
                 <ul class="follow-us clearfix">
                   <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                   <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -404,7 +413,7 @@ function innerHTML(val){
                 <p> &map; Samantha Hart</p>
                 <p>Circunvalación #79 1232145676</p>
                 <!--<button class="btn btn-default" onclick="showDetail" id="idButton3">Me interesa</button>-->
-                <a href="#modal01" rel="modal:open" class="btn btn-default">Me interesa</a>
+                <a href="#modal01" rel="modal:open" onclick="showDetail()" class="btn btn-default">Me interesa</a>
                 <ul class="follow-us clearfix">
                   <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                   <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -429,7 +438,7 @@ function innerHTML(val){
                 <p>&map; Patricio Rum</p>
                 <p>San Jacinto #23 3399887766</p>
                 <!--<button class="btn btn-default" onclick="showDetail" id="idButton1">Me interesa</button>-->
-                <a href="#modal01" rel="modal:open" class="btn btn-default">Me interesa</a>
+                <a href="#modal01" rel="modal:open" onclick="showDetail()" class="btn btn-default">Me interesa</a>
                 <ul class="follow-us clearfix">
                   <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                   <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -444,7 +453,7 @@ function innerHTML(val){
                 <p>&map; Jacob Lals</p>
                 <p>Avenida 33 3344556677</p>
                 <!--<button class="btn btn-default" onclick="showDetail" id="idButton2">Me interesa</button>-->
-                <a href="#modal01" rel="modal:open" class="btn btn-default">Me interesa</a>
+                <a href="#modal01" rel="modal:open" onclick="showDetail()" class="btn btn-default">Me interesa</a>
                 <ul class="follow-us clearfix">
                   <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                   <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -460,7 +469,7 @@ function innerHTML(val){
                 <p> &map; Samantha Hart</p>
                 <p>Circunvalación #79 1232145676</p>
                 <!--<button class="btn btn-default" onclick="showDetail" id="idButton3">Me interesa</button>-->
-                <a href="#modal01" rel="modal:open" class="btn btn-default">Me interesa</a>
+                <a href="#modal01" rel="modal:open" onclick="showDetail()" class="btn btn-default">Me interesa</a>
                 <ul class="follow-us clearfix">
                   <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                   <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>

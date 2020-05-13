@@ -15,13 +15,13 @@ router.get("/:email",auth.checkToken,(req,res) => {
         .catch(err => res.status(400).json({error:err}));
 });
 
-router.route('/:email').delete((req,res) => {
+router.delete('/:email',auth.checkToken,(req,res) => {
     User.findOneAndDelete({email:req.params.email})
         .then(user => res.json(user))
         .catch(err => res.status(400).json({error:err}));
 })
 
-router.route('/update/:email').post((req,res) => {
+router.put('/:email',auth.checkToken,(req,res) => {
     User.findOne({email:req.params.email})
         .then(user => {
             user.username = req.body.username;

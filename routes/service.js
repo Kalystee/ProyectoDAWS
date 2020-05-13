@@ -55,19 +55,18 @@ router.post('/add',auth.checkToken, async (req,res) => {
 })
 
 
-router.delete('/:id',(req,res) => {
+router.delete('/:id',auth.checkToken,(req,res) => {
     Service.findByIdAndDelete(req.params.id)
-        .then(service => res.json({msg:"Success"}))
+        .then(service => res.json(service))
         .catch(err => res.status(400).json({error:err}));
 })
 
-router.post('/update/:id',auth.checkToken,(req,res) => {
+router.put('/:id',auth.checkToken,(req,res) => {
     Service.findById(req.params.id)
         .then(service => {
             service.name = req.body.name;
             service.description = req.body.description;
-            service.date = req.body.date; //Date.parse en el frontend
-            service.time = req.body.time;
+            service.address = req.body.address;
             service.price = req.body.price;
 
             service.save()

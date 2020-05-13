@@ -1,7 +1,7 @@
 // index y validacion de usuarios
 "use strict"
 
-window.localStorage = {token:""}
+//window.localStorage = {token:""}
 
 //Cambios en el formulario de Login
 //Registro inicial
@@ -9,18 +9,24 @@ let register = document.getElementsByName("registro");
 //register.addEventListener('change', cambioReg );
 
 let invalid = document.querySelectorAll("#registro:invalid");
+
 let valid = document.querySelectorAll("#registro :valid");
+let btnReg = document.querySelector('.modal-footer .btn-primary');
+btnReg.setAttribute('disabled','');
 let btnSub = document.querySelector('[type=submit]');
-let btnSubR = document.querySelector('.modal-footer .btn-primary');
+
+
 
 let camposInv = document.querySelectorAll(".modal  input:invalid");
 
 //camposInv.forEach(obj => {obj.style = "border-color: red"});
-btnSubR.setAttribute('disabled','');
+
 
 let camposval = document.querySelectorAll(".modal  input:valid");
 camposval.forEach(obj => {obj.style = "border-color: none"});
 
+
+//Request HTTP
 async function makeHTTPRequest(endpoint,method,headers,body) {
     return await fetch("https://proyecto-dasw.herokuapp.com"/*"http://127.0.0.1:5000"*/+endpoint,{method:method,body:body,headers:headers})
         .then(response => {
@@ -39,24 +45,24 @@ function cambioReg(event) {
 
     let camposval = document.querySelectorAll(".modal  input:valid");
     camposval.forEach(obj => {obj.style = "border-color: none"});
-    
-    
-    
-    //console.log('cambio algo');
+
+    console.log('cambio algo');
    
      if (camposInv.length == 0) {
-        btnSubR.removeAttribute('disabled');
+        btnReg.removeAttribute('disabled');
         camposval.style = "border-color:none"
         
         
      } else {
-        btnSubR.setAttribute('disabled','');
+        btnReg.setAttribute('disabled','');
      }
 }
 
 async function signin (event) {
     let registerHeaders = {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'x-Auth': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF6YWFlQGF6ZS5mciIsImlhdCI6MTU4OTA4MTEwMSwiZXhwIjoxNTg5MDg4MzAxfQ.vr60yWehbfDPWR-7bu10dTI7K2wIcHfnMXr9wBBndFU'
+
     };
 
     let user = {
@@ -69,7 +75,16 @@ async function signin (event) {
         tipo: document.getElementById('UserTipo2').checked ? 1 : 0
     }
     let result = await makeHTTPRequest('/register', 'POST', registerHeaders,JSON.stringify(user));
-    console.log(result)
+    if (result !== undefined){
+        alert("Registro exitoso");
+        window.location = "services.html"
+        //console.log(user)
+
+        
+    } else {
+        alert("Hubo un error con tu registro verifica tus datos");
+    }
+
 }
 
 
@@ -77,19 +92,51 @@ async function signin (event) {
 
 async function logMe () {
     event.preventDefault();
+
+
+
     let registerHeaders = {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'x-auth': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzMyNzU3IiwiaWF0IjoxNTg4OTc1ODQ2fQ.ZYXxDPvbsaC-FaJ-LNvcRpu1wavOMVnC92VwXk22oWg'
+
     };
-    let userEmail = document.getElementById('emailLog').value;
     let user = {
-        email: userEmail,
+        email: document.getElementById('emailLog').value,
         password: document.getElementById('pwLogin').value
     }
 
-    let result = await makeHTTPRequest('/login', 'POST', registerHeaders, JSON.stringify(user));
-    window.localStorage.setItem("token",result.token);
-    window.localStorage.setItem("userEmail",userEmail);
-    if(result.token){
-        window.location = "services.html";
+    const url = 'https://proyecto-dasw.herokuapp.com/login'
+  
+    //aqui falla duno why
+
+    //let result = await makeHTTPRequest(url, 'PUSH', registerHeaders, JSON.stringify(user));
+
+   
+
+    //window.localStorage.setItem("token",result.token);
+
+    localStorage.token_user = await fetch(url,{ method: 'POST', body: JSON.stringify(user),headers: {"Content-Type":"application/json", "x-Auth": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzMyNzU3IiwiaWF0IjoxNTg4OTc1ODQ2fQ.ZYXxDPvbsaC-FaJ-LNvcRpu1wavOMVnC92VwXk22oWg" }})
+        .then(response => {
+            
+            return response.json();
+            
+        }).then(json => {
+            
+            return json.token;
+        });
+
+        
+        // tengo que atrapar la respuesta del servidor 
+        /*
+
+    if(localStorage.token_user !== undefined){
+        window.location.href = "./servicios.html";
+       //console.log('login exitoso')
+    }else{
+        alert("Error !");
     }
+    */
+
+   
+    
 }

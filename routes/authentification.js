@@ -17,7 +17,8 @@ router.route("/login").post(async (req,res) => {
 
         let token = jwt.sign({email:user.email},"secret",{expiresIn: "2h"})
         res.cookie("token",token);
-        res.json({token})
+        res.cookie("email",user.email);
+        res.json({token:token,email:user.email})
     }else{
         res.status(403).json({error:"Wrong password or email"})
     }
@@ -30,7 +31,6 @@ router.post('/register',async (req,res) => {
     if(user){
         res.status(403).json({error:"Email already used"});
     }
-    console.log(req.body)
     if(req.body.email && req.body.password && req.body.name && req.body.tipo !== undefined && req.body.postalCode && req.body.city && req.body.address){
         let hashedPassword = bcrypt.hashSync(req.body.password,8);
 

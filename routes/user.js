@@ -3,25 +3,25 @@
 const router = require('express').Router()
 let User = require("../models/User.model")
 const auth = require("./middleware/auth")
-router.get("/",auth.checkToken,async (req,res) => {
+router.get("/",auth.checkToken,(req,res) => {
     User.find()
         .then(users => res.json(users))
         .catch(err => res.status(400).json({error:err}));
 });
 
-router.route('/:email').get((req,res) => {
+router.get("/:email",auth.checkToken,(req,res) => {
     User.findOne({email:req.params.email})
+        .then(user => res.json(user))
+        .catch(err => res.status(400).json({error:err}));
+});
+
+router.delete('/:email',auth.checkToken,(req,res) => {
+    User.findOneAndDelete({email:req.params.email})
         .then(user => res.json(user))
         .catch(err => res.status(400).json({error:err}));
 })
 
-router.route('/:email').delete((req,res) => {
-    User.findOneAndDelete({email:req.params.email})
-        .then(user => res.json())
-        .catch(err => res.status(400).json({error:err}));
-})
-
-router.route('/update/:email').post((req,res) => {
+router.put('/:email',auth.checkToken,(req,res) => {
     User.findOne({email:req.params.email})
         .then(user => {
             user.username = req.body.username;

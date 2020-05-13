@@ -39,7 +39,7 @@ router.route('/by-categories/:categoryId').get((req,res) => {
 
 router.post('/add',auth.checkToken, async (req,res) => {
     const newService = new Service(req.body);
-    if(req.body.name && req.body.offererId && req.body.categoryId && req.body.description && req.body.date && req.body.time && req.body.price){
+    if(req.body.name && req.body.offererId && req.body.categoryId && req.body.description && req.body.address  && req.body.price){
         let category = await Categorie.findOne({id:req.body.categoryId});
         let user = await User.findOne({email:req.body.offererId});
         if(user.tipo === 1 && category){

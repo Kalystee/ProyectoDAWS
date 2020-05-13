@@ -24,9 +24,10 @@ router.delete('/:email',auth.checkToken,(req,res) => {
 router.put('/:email',auth.checkToken,(req,res) => {
     User.findOne({email:req.params.email})
         .then(user => {
-            user.username = req.body.username;
-            user.firstName = req.body.firstName;
-
+            user.name = req.body.name;
+            user.address = req.body.address;
+            user.city = req.body.city;
+            user.postalCode = req.body.postalCode
             user.save()
                 .then(() => res.json(user))
                 .catch(err => res.status(400).json({error:err}))

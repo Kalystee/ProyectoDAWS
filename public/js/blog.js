@@ -69,7 +69,7 @@ async function listServices(){
     };
     let user = window.localStorage.userEmail;
     alert(`/services/by-offerer/${user}`)
-    let result = await makeHTTPRequest('/services/offerer/:'+user, 'GET', headers);
+    let result = await makeHTTPRequest('/services/by-offerer/'+user, 'GET', headers);
     if (result.length > 0){
         console.log(result);
         let htmlOptions = "";
@@ -77,7 +77,7 @@ async function listServices(){
             htmlOptions += 
             `<div class="col-md-6 col-lg-12 d-flex ftco-animate">
                 <div class="blog-entry align-self-stretch">
-                    <a href="#"><i class="fa fa-close " onclick="borrarServicio()">Eliminar</i></a>
+                    <button onclick="borrarServicio(${service._id})" class="ft-trash" aria-hidden="true"></button>
                     <a href="blog-single.html" class="block-20 rounded" style="background-image: url('images/image_1.jpg');"><div class="posted mb-3 d-flex">
                     </a>
                     <div class="text mt-3 px-4">
@@ -96,21 +96,17 @@ async function listServices(){
         })
         $("#lista").append(htmlOptions); //Something like that to initialize the categories menu is good
     }else{
-        alert("De click en agregar servicio")
+        alert("De click en agregar servicio");
     }
 }
 
-function borrarServicio(id){
+async function borrarServicio(serviceId){
     let headers =   {"Content-Type" : "application/json",
                     "x-auth": window.localStorage.token};
-    let result = await makeHTTPRequest('/services/offerer/:'+user, 'GET', headers);
-    if (result.length > 0){
-        console.log(result);
-        result.forEach(service => {
-            if (id == service.id) {
-                await makeHTTPRequest('/services/'+id, 'DELETE', headers);
-                window.reload
-            }else alert(service.id + 'No se ha podido borrar')
-        })
+    let result = await makeHTTPRequest('/services/'+serviceId, 'DELETE', headers, null);
+    if (result.error){
+        alert(error)
+        }else alert('Success')
     }
-}
+
+

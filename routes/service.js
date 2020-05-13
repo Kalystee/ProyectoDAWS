@@ -1,5 +1,7 @@
 //Guillaume THIBAULT
 
+const auth = require( "./middleware/auth");
+
 const router = require('express').Router()
 let Service = require("../models/Service.model");
 let Categorie =require("../models/Categorie.model");
@@ -35,7 +37,7 @@ router.route('/by-categories/:categoryId').get((req,res) => {
         .catch(err => res.status(400).json({error:err}));
 })
 
-router.route('/add').post( async (req,res) => {
+router.post('/add',auth.checkToken, async (req,res) => {
     const newService = new Service(req.body);
     if(req.body.name && req.body.offererId && req.body.categoryId && req.body.description && req.body.date && req.body.time && req.body.price){
         let category = await Categorie.findOne({id:req.body.categoryId});
@@ -53,13 +55,13 @@ router.route('/add').post( async (req,res) => {
 })
 
 
-router.route('/:id').delete((req,res) => {
+router.delete('/:id',(req,res) => {
     Service.findByIdAndDelete(req.params.id)
         .then(service => res.json({msg:"Success"}))
         .catch(err => res.status(400).json({error:err}));
 })
 
-router.route('/update/:id').post((req,res) => {
+router.post('/update/:id',auth.checkToken,(req,res) => {
     Service.findById(req.params.id)
         .then(service => {
             service.name = req.body.name;

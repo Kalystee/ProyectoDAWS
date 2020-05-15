@@ -13,6 +13,7 @@ const port = process.env.PORT || 5000;
 app.use(cors())
 app.use(express.json())
 app.use(cookieParser())
+app.use(express.static(__dirname + '/public'));
 
 const uri = process.env.ATLAS_URI
 mongoose.connect(uri, { useNewUrlParser:true, useCreateIndex:true,useUnifiedTopology: true });
@@ -25,6 +26,10 @@ const categorieRouter = require("./routes/categorie");
 const userRouter = require("./routes/user");
 const serviceRouter = require("./routes/service");
 const authentificationRouter = require("./routes/authentification");
+
+app.get('/', function(req, res) {
+    res.sendFile('public/index.html', { root: __dirname });
+});
 
 app.use(authentificationRouter);
 app.use("/categories",categorieRouter);

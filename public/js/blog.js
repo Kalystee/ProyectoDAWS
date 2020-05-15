@@ -69,7 +69,7 @@ async function listServices(){
     };
     let user = window.localStorage.userEmail;
     alert(`/services/by-offerer/${user}`)
-    let result = await makeHTTPRequest('/services/offerer/:'+user, 'GET', headers);
+    let result = await makeHTTPRequest('/services/by-offerer/'+user, 'GET', headers);
     if (result.length > 0){
         console.log(result);
         let htmlOptions = "";
@@ -96,11 +96,11 @@ async function listServices(){
         })
         $("#lista").append(htmlOptions); //Something like that to initialize the categories menu is good
     }else{
-        alert("De click en agregar servicio")
+        alert("De click en agregar servicio");
     }
 }
 
-function borrarServicio(serviceId){
+async function borrarServicio(serviceId){
     let headers =   {"Content-Type" : "application/json",
                     "x-auth": window.localStorage.token};
     let result = await makeHTTPRequest('/services/'+serviceId, 'DELETE', headers, null);

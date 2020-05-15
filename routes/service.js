@@ -26,13 +26,14 @@ router.route("/").get(async (req,res) => {
 })
 
 router.route('/by-offerer/:offererId').get((req,res) => {
-    Service.findBy({offererId:req.params.offererId})
+    console.log(req.params.offererId);
+    Service.find({offererId:req.params.offererId})
         .then(service => res.json(service))
         .catch(err => res.status(400).json({error:err}));
 })
 
 router.route('/by-categories/:categoryId').get((req,res) => {
-    Service.findBy({categoryId:req.params.categoryId})
+    Service.find({categoryId:req.params.categoryId})
         .then(service => res.json(service))
         .catch(err => res.status(400).json({error:err}));
 })

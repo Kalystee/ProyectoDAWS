@@ -47,7 +47,7 @@ function cambioReg(event) {
     camposval.forEach(obj => {obj.style = "border-color: none"});
 
     console.log('cambio algo');
-   
+
      if (camposInv.length == 0) {
         btnReg.removeAttribute('disabled');
         camposval.style = "border-color:none"
@@ -60,9 +60,7 @@ function cambioReg(event) {
 
 async function signin (event) {
     let registerHeaders = {
-        'Content-Type': 'application/json',
-        'x-Auth': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF6YWFlQGF6ZS5mciIsImlhdCI6MTU4OTA4MTEwMSwiZXhwIjoxNTg5MDg4MzAxfQ.vr60yWehbfDPWR-7bu10dTI7K2wIcHfnMXr9wBBndFU'
-
+        'Content-Type': 'application/json'
     };
 
     let user = {
@@ -75,16 +73,7 @@ async function signin (event) {
         tipo: document.getElementById('UserTipo2').checked ? 1 : 0
     }
     let result = await makeHTTPRequest('/register', 'POST', registerHeaders,JSON.stringify(user));
-    if (result !== undefined){
-        alert("Registro exitoso");
-        window.location = "services.html"
-        //console.log(user)
-
-        
-    } else {
-        alert("Hubo un error con tu registro verifica tus datos");
-    }
-
+    console.log(result)
 }
 
 
@@ -92,51 +81,19 @@ async function signin (event) {
 
 async function logMe () {
     event.preventDefault();
-
-
-
     let registerHeaders = {
-        'Content-Type': 'application/json',
-        'x-auth': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzMyNzU3IiwiaWF0IjoxNTg4OTc1ODQ2fQ.ZYXxDPvbsaC-FaJ-LNvcRpu1wavOMVnC92VwXk22oWg'
-
+        'Content-Type': 'application/json'
     };
+    let userEmail = document.getElementById('emailLog').value;
     let user = {
-        email: document.getElementById('emailLog').value,
+        email: userEmail,
         password: document.getElementById('pwLogin').value
     }
 
-    const url = 'https://proyecto-dasw.herokuapp.com/login'
-  
-    //aqui falla duno why
-
-    //let result = await makeHTTPRequest(url, 'PUSH', registerHeaders, JSON.stringify(user));
-
-   
-
-    //window.localStorage.setItem("token",result.token);
-
-    localStorage.token_user = await fetch(url,{ method: 'POST', body: JSON.stringify(user),headers: {"Content-Type":"application/json", "x-Auth": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzMyNzU3IiwiaWF0IjoxNTg4OTc1ODQ2fQ.ZYXxDPvbsaC-FaJ-LNvcRpu1wavOMVnC92VwXk22oWg" }})
-        .then(response => {
-            
-            return response.json();
-            
-        }).then(json => {
-            
-            return json.token;
-        });
-
-        
-        // tengo que atrapar la respuesta del servidor 
-        /*
-
-    if(localStorage.token_user !== undefined){
-        window.location.href = "./servicios.html";
-       //console.log('login exitoso')
-    }else{
-        alert("Error !");
+    let result = await makeHTTPRequest('/login', 'POST', registerHeaders, JSON.stringify(user));
+    window.localStorage.setItem("token",result.token);
+    window.localStorage.setItem("userEmail",userEmail);
+    if(result.token){
+        window.location = "services.html";
     }
-    */
-
-   
-    
 }

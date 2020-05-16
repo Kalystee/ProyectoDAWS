@@ -78,7 +78,7 @@ async function listServices(){
             `<div class="col-md-6 col-lg-3 d-flex center ">
                 <div class="blog-entry align-self-stretch">
                     <button onclick="borrarServicio('${service._id}')" class="btn btn-danger ft-trash" aria-hidden="true">Quitar</button>
-                    <button onclick="editarServicio('${service._id}')'" class="btn btn-dark ft-trash" aria-hidden="true">Editar</button>
+                    <button onclick="editarServicio('${service}')'" class="btn btn-dark ft-trash" aria-hidden="true">Editar</button>
                     <a href="blog-single.html" class="block-20 rounded" style="background-image: url('./images/image_1.jpg');"></a>
                     <div class="text mt-3 px-4">
                         <div class="img author" style="background-image: url('./images/person_2.jpg');"></div>
@@ -113,6 +113,56 @@ async function borrarServicio(serviceId){
         }else alert('Servicio borrado compadre')
     }
 
-async function editarServicio(serviceId){
+
+    //modal de edicion de servicios
+    //OCUPO TODO EL JSON DEL SERVICIO AQUI
+function ShowEdit(serviceEdit){
+   
+
+        $$('#modalForm').modal('toggle');
+
+        document.getElementById('nameService').value=serviceEdit.name;
+        document.getElementById('descriptionService').value = serviceEdit.description;
+        document.getElementById('priceService').value = serviceEdit.price;
+       document.getElementById('categoryService').value = serviceEdit.categoryId;
+
+        
+
+
+        $('#savebtn').off('click').on('click', editItem);
+
     
 }
+
+//Funcion de enviar (save)
+
+
+async function editItem (event) {
+    let headers = {
+        'Content-Type': 'application/json',
+        'x-auth': window.localStorage.token,
+        "x-user-token":window.localStorage.token_user
+        
+    };
+let service = {
+ name: document.getElementById('nameService').value,
+ description:document.getElementById('descriptionService').value,
+ price:document.getElementById('priceService').value,
+ categoryId:document.getElementById('categoryService').value
+
+}
+
+let response = await fetch('/update-client/:'+window.localStorage.userEmail,{method:"PUT",body:JSON.stringify(service),headers})
+.then(response => {
+    console.log(response);
+    userToHTML(user);
+    setTimeout(function () {
+        $(".alert").remove();
+    },3000);
+});
+
+
+}
+
+
+

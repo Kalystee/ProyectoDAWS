@@ -152,8 +152,8 @@ async function makeHTTPRequest(endpoint,method,headers,body=null) {
     result.forEach(service => {
         htmlOptions +=  
   `
-    <ul class="row">
-      <li class="col-12 col-md-12 col-md-12">
+    <div class="row">
+      <div class="col-12 col-md-12 col-md-12">
           <div class="cnt-block " style="height: auto;">
             <figure><img src="https://picsum.photos/200/300" class="img-responsive" alt="https://picsum.photos/200/300/?blur" width="100%"></figure>
             <h3 class="heading"><a href="#">${service.name}</a></h3>
@@ -172,7 +172,8 @@ async function makeHTTPRequest(endpoint,method,headers,body=null) {
               <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
             </ul>
           </div>
-      </li>`
+      </div>
+      </div>`
     })
   }else return alert(error);
 }

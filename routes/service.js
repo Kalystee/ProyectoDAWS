@@ -25,6 +25,12 @@ router.route("/").get(async (req,res) => {
     res.json(services)
 })
 
+router.get('/:id',auth.checkToken,(req,res) => {
+    Service.find({_id:req.params.id})
+        .then(service => res.json(service))
+        .catch(err => res.status(400).json({error:err}));
+})
+
 router.get('/by-offerer/:offererId',auth.checkToken,(req,res) => {
     Service.find({offererId:req.params.offererId})
         .then(service => res.json(service))

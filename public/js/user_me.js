@@ -227,7 +227,7 @@ async function getServicesByUser ()
     let headers = {
         'Content-Type': 'application/json',
         'x-auth': window.localStorage.token,
-        "x-user-token":window.localStorage.token_user
+        //"x-user-token":window.localStorage.token_user
         
     };
     let response;

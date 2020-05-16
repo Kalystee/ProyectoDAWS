@@ -78,7 +78,7 @@ async function listServices(){
             `<div class="col-md-6 col-lg-3 d-flex center ">
                 <div class="blog-entry align-self-stretch">
                     <button onclick="borrarServicio('${service._id}')" class="btn btn-danger ft-trash" aria-hidden="true">Quitar</button>
-                    <button onclick="editarServicio('${service._id})'" class="btn btn-dark ft-trash" aria-hidden="true">Editar</button>
+                    <button onclick="editarServicio('${service._id}')'" class="btn btn-dark ft-trash" aria-hidden="true">Editar</button>
                     <a href="blog-single.html" class="block-20 rounded" style="background-image: url('./images/image_1.jpg');"></a>
                     <div class="text mt-3 px-4">
                         <div class="img author" style="background-image: url('./images/person_2.jpg');"></div>
@@ -113,4 +113,6 @@ async function borrarServicio(serviceId){
         }else alert('Servicio borrado compadre')
     }
 
-
+async function editarServicio(serviceId){
+    
+}

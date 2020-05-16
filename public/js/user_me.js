@@ -6,6 +6,8 @@ document.body.onload = displayUser;
 //donde vas a colocar el html
 let usercard =document.getElementById("usercard");
 
+
+
 //en donde se va a cargar el html que le determines 
     //let htmlString = innerHTML(val);
 //el espacio en el front donde se va a visualizar
@@ -61,8 +63,12 @@ function userToHTML (user) {
 <li class="list-group-item">tipo de perfil: <a href="#">${tipo} </a></li>
 </ul>
 <div class="card-body">
-<a href="#" class="btn btn-primary " id="btn_editar"  onclick="EditUser()" data-toggle="modal" data-target="#myModal"  >Editar</a>
-<a href="#" class="btn btn-primary" id="btn_borrar" onclick="DeleteUser() " >Borrar perfil</a>
+    <a href="#" class="btn btn-primary " id="btn_editar"  onclick="EditUser()" data-toggle="modal" data-target="#myModal"  >Editar</a>
+    <a href="#" class="btn btn-primary" id="btn_borrar" onclick="DeleteUser() " >Borrar perfil</a>
+    <button class="btn btn-primary" id="btn_services" onclick="getServicesByUser()" value='notprinted' >Mostrar Servicios</button>
+    <div id="new">
+
+    </div>
 </div> 
 
 
@@ -106,7 +112,8 @@ function userToHTML (user) {
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" onclick= "EnviarCambios()">Save changes</button>
+          <button type="button" class="btn btn-primary" onclick= "EnviarCambios()">Save changes</button> </br>
+
         </div>
       </div>
     </div>
@@ -187,6 +194,18 @@ let user = {
    
 }
 
+
+
+//btn_servs = document.getElementById("btn_services").onclick = getServicesByUser;
+
+//document.getElementById("btn_services").addEventListener("click",getServicesByUser);
+
+
+
+
+
+
+
 let response= await fetch('https://proyecto-dasw.herokuapp.com/users/'+window.localStorage.userEmail,{method:"PUT",body:JSON.stringify(user),headers:{"Content-Type":"application/json","x-auth":window.localStorage.token,"x-user-token":window.localStorage.token_user}})
 .then(response => {
     console.log(response);
@@ -198,6 +217,77 @@ let response= await fetch('https://proyecto-dasw.herokuapp.com/users/'+window.lo
 
 
 }
+
+
+async function getServicesByUser () 
+{    //Pedir el string del servicio y relacionarlo con el usuario , ir a la tabla de servicios y tomar la fecha
+    console.log ('servcesbyuser')
+    
+    
+    let headers = {
+        'Content-Type': 'application/json',
+        'x-auth': window.localStorage.token,
+        "x-user-token":window.localStorage.token_user
+        
+    };
+    let response;
+    response =  await makeHTTPRequest('/services/by-client/'+window.localStorage.userEmail, 'GET', headers);
+        var elementbtn = document.getElementById('btn_services').value;
+
+        if(elementbtn === 'notprinted'){
+            for(let i = 0; i < response.length ; i++){
+                var tag = document.createElement("label");
+                var tag2= document.createElement("label");
+                var tag3 = document.createElement("label");
+                var tag5= document.createElement("button")
+                var tag4 = document.createElement("br");
+
+                tag.setAttribute("id","serv"+i);
+                tag2.setAttribute("id","pers"+i);
+                tag3.setAttribute("id","cat"+i);
+                tag5.setAttribute("id","completado"+i )
+
+                var text = document.createTextNode(response[i].name);
+                var tpers = document.createTextNode(response[i].offererId);
+                var tcat = document.createTextNode(response[i].categoryId);
+                var tborrar = document.createTextNode("Completado");
+
+                tag.appendChild(text);
+                tag2.appendChild(tpers);
+                tag3.appendChild(tcat);
+                tag5.appendChild(tborrar);
+
+                var element = document.getElementById("new");
+                element.appendChild(tag);
+                element.innerHTML+='&nbsp; &nbsp;'
+                element.appendChild(tag2);
+                element.innerHTML+='&nbsp; &nbsp;'
+                element.appendChild(tag3);
+                element.appendChild(tag5)
+                element.appendChild(tag4);
+            }
+            document.getElementById('btn_services').value = "printed";
+            document.getElementById('btn_services').innerText = "Esconder Servicios";
+        } else{
+            for(let i = 0; i < response.length ; i++){
+                document.getElementById("serv"+i).remove();
+                document.getElementById("pers"+i).remove();
+                document.getElementById("cat"+i).remove();
+
+            }
+            document.getElementById('btn_services').value = "notprinted";
+            document.getElementById('btn_services').innerText = "Mostrar Servicios";
+        }
+
+    console.log("Servicios: "+servicesArray[0].name); 
+
+    // for each sercvices add a label 
+
+}
+
+
+
+
 
 
 

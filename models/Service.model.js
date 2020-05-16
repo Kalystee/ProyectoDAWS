@@ -10,7 +10,8 @@ const serviceSchema = new Schema({
     address:{type: String, required: true},
     price:{type: Number, required: true},
     categoryId:{type: String, required: true},
-    offererId:{type: String, required: true}
+    offererId:{type: String, required: true},
+    clientId:{type: String}
 });
 
 const Service = mongoose.model("Service",serviceSchema);

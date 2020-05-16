@@ -25,9 +25,14 @@ router.route("/").get(async (req,res) => {
     res.json(services)
 })
 
-router.route('/by-offerer/:offererId').get((req,res) => {
-    console.log(req.params.offererId);
+router.get('/by-offerer/:offererId',auth.checkToken,(req,res) => {
     Service.find({offererId:req.params.offererId})
+        .then(service => res.json(service))
+        .catch(err => res.status(400).json({error:err}));
+})
+
+router.get('/by-client/:clientId',auth.checkToken,(req,res) => {
+    Service.find({clientId:req.params.clientId})
         .then(service => res.json(service))
         .catch(err => res.status(400).json({error:err}));
 })
@@ -70,6 +75,17 @@ router.put('/:id',auth.checkToken,(req,res) => {
             service.address = req.body.address;
             service.price = req.body.price;
 
+            service.save()
+                .then(() => res.json(service))
+                .catch(err => res.status(400).json({error:err}))
+        })
+        .catch(err => res.status(400).json({error:err}));
+})
+
+router.put('/update-client/:id/:clientId',auth.checkToken,async (req,res) => {
+    Service.findById(req.params.id)
+        .then(service => {
+            service.clientId = req.params.clientId;
             service.save()
                 .then(() => res.json(service))
                 .catch(err => res.status(400).json({error:err}))

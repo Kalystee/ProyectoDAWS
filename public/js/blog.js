@@ -33,7 +33,7 @@ async function registerService () {
         name: document.getElementById('nameService').value,
         description: document.getElementById('descriptionService').value, 
         price: document.getElementById('priceService').value,
-        categoryId: document.getElementById('categoryService').value,
+        categoryId: document.getElementById('selectCategories').value,
         address: document.getElementById('addressService').value,
         offererId: window.localStorage.userEmail
 //        image: document.getElementById('imageService').value //Guillaume :Pienso que no vamos a utilizar imagen al final, no tenemos tiempo
@@ -48,6 +48,7 @@ async function registerService () {
         alert("Error: "+result.error)
     }else{
         alert("Servicio: "+result.name+" agregado. ")
+        location.reload();
     }
 } 
 
@@ -111,6 +112,7 @@ async function borrarServicio(serviceId){
     if (result.error){
         alert(error)
         }else alert('Servicio borrado compadre')
+        location.reload();
     }
 
 
@@ -124,7 +126,7 @@ function ShowEdit(serviceEdit){
         document.getElementById('nameService').value=serviceEdit.name;
         document.getElementById('descriptionService').value = serviceEdit.description;
         document.getElementById('priceService').value = serviceEdit.price;
-       document.getElementById('categoryService').value = serviceEdit.categoryId;
+       document.getElementById('selectCategories').value = serviceEdit.categoryId;
 
         
 
@@ -141,18 +143,18 @@ async function editItem (event) {
     let headers = {
         'Content-Type': 'application/json',
         'x-auth': window.localStorage.token,
-        "x-user-token":window.localStorage.token_user
+        "x-user":window.localStorage.userEmail
         
     };
 let service = {
  name: document.getElementById('nameService').value,
  description:document.getElementById('descriptionService').value,
  price:document.getElementById('priceService').value,
- categoryId:document.getElementById('categoryService').value
+ categoryId:document.getElementById('selectCategories').value
 
 }
-
-let response = await fetch('/update-client/:'+window.localStorage.userEmail,{method:"PUT",body:JSON.stringify(service),headers})
+console.log(service)
+let response = await fetch('/update-client/'+window.localStorage.userEmail,{method:"PUT",body:JSON.stringify(service),headers})
 .then(response => {
     console.log(response);
     userToHTML(user);

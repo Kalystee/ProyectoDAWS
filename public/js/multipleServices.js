@@ -28,11 +28,53 @@ function showDetail(idService, idCategory){
   console.log("ShowDetail activated")
 }
 
-function innerHTML(val){
+async function listServices(some){
+  let headers = {
+      'Content-Type': 'application/json',
+      'x-auth': window.localStorage.token
+    };
+      let result = await makeHTTPRequest('/services/by-categories/'+some, 'GET', headers);
+      
+      if (result.length > 0){
+        console.log(result);
+        let htmlOptions = "";
+        result.forEach(service => {
+            htmlOptions +=  
+            `<div class="col-md-6 col-lg-3 d-flex center ">
+                <div class="blog-entry align-self-stretch">
+                    <!--<button onclick="borrarServicio('${service._id}')" class="btn btn-danger ft-trash" aria-hidden="true">Quitar</button>-->
+                    <!--<button onclick="editarServicio('${service._id}')'" class="btn btn-dark ft-trash" aria-hidden="true">Editar</button>-->
+                    <a href="blog-single.html" class="block-20 rounded" style="background-image: url('./images/image_1.jpg');"></a>
+                    <div class="text mt-3 px-4">
+                        <div class="img author" style="background-image: url('./images/person_2.jpg');"></div>
+                        <div class="desc pl-3">
+                            <span>${service.offererId}</span>
+                        </div>
+                    </div>
+                    <h3 class="heading"><a href="#">${service.name}</a></h3>
+                    <p>Costo: $${service.price}</p>
+                    <p>Dirección: ${service.address}</p>
+                    <p>Descripción: ${service.description}</p>
+                </div>
+            </div>`
+            
+        })
+        
+        document.getElementById("lista").innerHTML = htmlOptions
+    }else{
+        alert("No tiene servicios, para agregar algún servicio, de click en el Botón 'Agregar Servicios'");
+    }
+    return result
+}
+
+async function innerHTML(val){
     var valor = loadPage('value')
     switch (valor) {
         case 'comida':
-            return`<div class="row heading heading-icon">
+
+          listServices("comida")
+          break;
+            /*return`<div class="row heading heading-icon">
             <h2>Servicios de Comida</h2>
         </div>
         <ul class="row">
@@ -87,7 +129,7 @@ function innerHTML(val){
         <p>Aqui va la BD del prestador de servicios. PROXIMAMENTE</p>
         <button class="btn btn-primary">Contratar</button>
         </div>`
-            break;
+            break;*/
         case 'baile':
             return `<div class="row heading heading-icon">
             <h2>Servicios de baile</h2>

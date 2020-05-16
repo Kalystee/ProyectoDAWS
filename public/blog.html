@@ -78,24 +78,7 @@
       <div class="container ">
         <div class="row d-flex" id="lista">
           <!--inner text-->
-          <div class="col-md-6 col-lg-12 d-flex ftco-animate">
-            <div class="blog-entry align-self-stretch">
-                <a href="#"><i class="fa fa-close " onclick="borrarServicio()">Eliminar</i></a>
-                <a href="blog-single.html" class="block-20 rounded" style="background-image: url('images/image_1.jpg');"><div class="posted mb-3 d-flex">
-                </a>
-                <div class="text mt-3 px-4">
-                    <div class="img author" style="background-image: url(images/person_2.jpg);"></div>
-                        <div class="desc pl-3">
-                            <span>${service.offererId}</span>
-                </div>
-                </div>
-                    <h3 class="heading"><a href="#">${service.name}</a></h3>
-                    <p>Costo: $${service.costo}</p>
-                    <p>Dirección: ${service.address}</p>
-                    <p>Descripción: ${service.description}</p>
-                </div>
-            </div>
-        </div>
+          
         </div>
         <div class="row mt-5">
           <div class="col text-center">
@@ -141,16 +124,9 @@
                         <!-- Phone number -->
                         <div class="form-group">
                           <label for="">Selecciona la categoría</label>
-                          <select required class="form-control" name="categoryServices" id="categoryService">
+                          <select required class="form-control" name="categoryServices" id="selectCategories">
                             <option selected>Select one</option>
-                            <option value="comida">comida</option>
-                            <option value="baile">baile</option>
-                            <option value="perros">Mascotas</option>
-                            <option value="tutorias">tutorias</option>
-                            <option value="electro">Electrodomesticos</option>
-                            <option value="jardineria">jardineria</option>
-                            <option value="ninera">niñera</option>
-                            <option value="limpieza">Limpieza</option>
+                            
                           </select>
                         </div>
                         <input type="text" id="descriptionService" class="form-control" placeholder="Descripción">

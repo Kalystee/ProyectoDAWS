@@ -68,45 +68,49 @@ async function listServices(){
         'x-auth': window.localStorage.token
     };
     let user = window.localStorage.userEmail;
-    alert(`/services/by-offerer/${user}`)
-    let result = await makeHTTPRequest('/services/by-offerer/'+user, 'GET', headers);
+    alert(`${user}`)
+    let result = await makeHTTPRequest('/services/by-offerer/'+window.localStorage.userEmail, 'GET', headers);
     if (result.length > 0){
         console.log(result);
         let htmlOptions = "";
         result.forEach(service => {
-            htmlOptions += 
-            `<div class="col-md-6 col-lg-12 d-flex ftco-animate">
+            htmlOptions +=  
+            `<div class="col-md-6 col-lg-3 d-flex center ">
                 <div class="blog-entry align-self-stretch">
-                    <button onclick="borrarServicio(${service._id})" class="ft-trash" aria-hidden="true"></button>
-                    <a href="blog-single.html" class="block-20 rounded" style="background-image: url('images/image_1.jpg');"><div class="posted mb-3 d-flex">
-                    </a>
+                    <button onclick="borrarServicio('${service._id}')" class="btn btn-danger ft-trash" aria-hidden="true">Quitar</button>
+                    <button onclick="editarServicio('${service._id})'" class="btn btn-dark ft-trash" aria-hidden="true">Editar</button>
+                    <a href="blog-single.html" class="block-20 rounded" style="background-image: url('./images/image_1.jpg');"></a>
                     <div class="text mt-3 px-4">
-                        <div class="img author" style="background-image: url(images/person_2.jpg);"></div>
-                            <div class="desc pl-3">
-                                <span>${service.offererId}</span>
+                        <div class="img author" style="background-image: url('./images/person_2.jpg');"></div>
+                        <div class="desc pl-3">
+                            <span>${service.offererId}</span>
+                        </div>
                     </div>
-                    </div>
-                        <h3 class="heading"><a href="#">${service.name}</a></h3>
-                        <p>Costo: $${service.costo}</p>
-                        <p>Dirección: ${service.address}</p>
-                        <p>Descripción: ${service.description}</p>
-                    </div>
+                    <h3 class="heading"><a href="#">${service.name}</a></h3>
+                    <p>Costo: $${service.price}</p>
+                    <p>Dirección: ${service.address}</p>
+                    <p>Descripción: ${service.description}</p>
                 </div>
             </div>`
+            
         })
-        $("#lista").append(htmlOptions); //Something like that to initialize the categories menu is good
+        
+        document.getElementById("lista").innerHTML = htmlOptions
     }else{
-        alert("De click en agregar servicio");
+        alert("No tiene servicios, para agregar algún servicio, de click en el Botón 'Agregar Servicios'");
     }
 }
 
+
 async function borrarServicio(serviceId){
+    console.log(serviceId)
     let headers =   {"Content-Type" : "application/json",
                     "x-auth": window.localStorage.token};
     let result = await makeHTTPRequest('/services/'+serviceId, 'DELETE', headers, null);
+    
     if (result.error){
         alert(error)
-        }else alert('Success')
+        }else alert('Servicio borrado compadre')
     }
 
 

@@ -82,7 +82,7 @@ async function listServices(some){
     return result
 }
 async function contratar( id){
-  alert("hola")
+  
   window.localStorage.id = id;
   let headers = {
     'Content-Type': 'application/json',

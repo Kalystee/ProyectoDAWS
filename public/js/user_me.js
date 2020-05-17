@@ -268,7 +268,7 @@ async function getServicesByUser ()
             document.getElementById('btn_services').innerText = "Mostrar Servicios";
         }
 
-    console.log("Servicios: "+servicesArray[0].name); 
+    console.log("Servicios: "+servicesArray.name); 
 
     // for each sercvices add a label 
 

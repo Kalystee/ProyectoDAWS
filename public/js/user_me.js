@@ -1,7 +1,7 @@
 //user profile
 'use strict'
 
-document.body.onload = displayUser;
+document.body.onload = displayUser; 
 
 //donde vas a colocar el html
 let usercard =document.getElementById("usercard");

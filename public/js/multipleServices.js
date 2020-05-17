@@ -55,13 +55,15 @@ async function listServices(some){
                 <h3 class="heading"><a href="#">${service.name}</a></h3>
                 <div class="desc pl-3">
                     <span>${service.offererId}</span>
+                    <span>${service._id}</span>
+
                 </div>
 
                 <p>Costo: $${service.price}</p>
                 <p>Dirección: ${service.address}</p>
                 <p>Descripción: ${service.description}</p>
                 <!--<button class="btn btn-default" onclick="showDetail" id="idButton1">Me interesa</button>-->
-                <a onclick="contratar(${service._id})" class="btn btn-default"  >Contratar</a>
+                <button onclick="contratar('${service._id}')" class="btn btn-default"  >Contratar</button>
                 <ul class="follow-us clearfix">
                   <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                   <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -81,13 +83,17 @@ async function listServices(some){
 }
 async function contratar( id){
   alert("hola")
+  window.localStorage.id = id;
   let headers = {
     'Content-Type': 'application/json',
     'x-auth': window.localStorage.token,
-    "x-user":window.localStorage.userEmail
-    
+    "x-user":window.localStorage.userEmail,
+    "data-id": id   
 };
-  let bodyToUpdate = `"_id":" ${id} ", "clientId":" ${window.localStorage.userEmail} "`
+  let bodyToUpdate = {
+    _id: id,
+    clientId:window.localStorage.userEmail
+  }
   let response = await fetch('/services/update-client/'+id+'/'+window.localStorage.userEmail,{method:"PUT",body:JSON.stringify(bodyToUpdate),headers})
   .then(response => {
     console.log(response);
@@ -159,6 +165,7 @@ async function makeHTTPRequest(endpoint,method,headers,body=null) {
             <h3 class="heading"><a href="#">${service.name}</a></h3>
             <div class="desc pl-3">
                 <span>${service.offererId}</span>
+                <span>${service._id}</span>
             </div>
 
             <p>Costo: $${service.price}</p>

@@ -47,7 +47,7 @@ function userToHTML (user) {
    // console.log("holi ");
     //console.log(user);
     //var valor = loadPage('value')
-    let tipo = (user.tipo == 0) ? 'Prestador':'Cliente';
+    let tipo = (user.tipo == 1) ? 'Prestador':'Cliente';
     let nombre = (user.name);    
 
     usercard.innerHTML =  `<div class="card mx-auto" style="width: 75%; margin-top: 4em; " id="usercard">
@@ -196,16 +196,6 @@ let user = {
 
 
 
-//btn_servs = document.getElementById("btn_services").onclick = getServicesByUser;
-
-//document.getElementById("btn_services").addEventListener("click",getServicesByUser);
-
-
-
-
-
-
-
 let response= await fetch('https://proyecto-dasw.herokuapp.com/users/'+window.localStorage.userEmail,{method:"PUT",body:JSON.stringify(user),headers:{"Content-Type":"application/json","x-auth":window.localStorage.token,"x-user-token":window.localStorage.token_user}})
 .then(response => {
     console.log(response);
@@ -227,11 +217,10 @@ async function getServicesByUser ()
     let headers = {
         'Content-Type': 'application/json',
         'x-auth': window.localStorage.token,
-        //"x-user-token":window.localStorage.token_user
+        "x-user":window.localStorage.userEmail
         
     };
-    let response;
-    response =  await makeHTTPRequest('/services/by-client/'+window.localStorage.userEmail, 'GET', headers);
+    let response =  await makeHTTPRequest('/services/by-client/'+window.localStorage.userEmail, 'GET', headers);
         var elementbtn = document.getElementById('btn_services').value;
 
         if(elementbtn === 'notprinted'){
@@ -287,21 +276,12 @@ async function getServicesByUser ()
 
 
 
-
-
-
-
-
-
-
-//Guillaume : Porque no utilizas la misma que antes que funciona ? las errores vienian que makeHTTPRequestUsuarios
-//Request HTTP
-async function makeHTTPRequest(endpoint,method,headers) {
-    return await fetch("https://proyecto-dasw.herokuapp.com"/*"http://127.0.0.1:5000"*/+endpoint,{method:method,headers:headers})
+async function makeHTTPRequest(endpoint,method,headers,body=null) {
+    return await fetch("https://proyecto-dasw.herokuapp.com"/*"http://127.0.0.1:5000"*/+endpoint,{method:method,body:body,headers:headers})
         .then(response => {
             return response.json()
         })
-}
+  }
 
 //Peticion de get al servidor
 
